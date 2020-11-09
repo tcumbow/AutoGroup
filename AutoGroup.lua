@@ -10,11 +10,11 @@ local function LeaveGroup()
 end
 
 local function OnEventFriendPlayerStatusChanged(PlayerName,prevStatus,curStatus)
-	if PlayerName == "@Samantha.C" and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
+	if PlayerName == "@Samantha.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
 		GroupInviteByName("@Samantha.C")
 	end
 	
-	if PlayerName == "@Tommy.C" and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
+	if PlayerName == "@Tommy.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
 		GroupInviteByName("@Tommy.C")
 	end
 	
