@@ -17,15 +17,42 @@ local function OnEventFriendPlayerStatusChanged(PlayerName,prevStatus,curStatus)
 	if PlayerName == "@Tommy.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
 		GroupInviteByName("@Tommy.C")
 	end
-	
+
+	DisbandIfEmpty()
+
 end
+
+local function DisbandIfEmpty()
+	
+	if IsUnitGrouped("player") then
+		local GroupEmpty = true
+		for i = 1, GetGroupSize() do
+			local unitTag = GetGroupUnitTagByIndex(i)
+			local IsPlayer = (GetUnitType(unitTag) == 1)
+			local Online = IsUnitOnline(unitTag)
+			local RawUnitName = GetRawUnitName(unitTag)
+			local IsNotSelf = (RawUnitName ~= GetRawUnitName("player"))
+
+			if IsPlayer and Online and IsNotSelf then
+				GroupEmpty = false
+			end
+		end
+
+		if GroupEmpty then
+			GroupDisband()
+		end
+
+	end
+
+end
+
 
 local function OnAddonLoaded(event, name)
 	if name == ADDON_NAME then
 		EVENT_MANAGER:UnregisterForEvent(ADDON_NAME, event)
 		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_LOGOUT_DEFERRED, LeaveGroup)
 		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_FRIEND_PLAYER_STATUS_CHANGED, OnEventFriendPlayerStatusChanged)
-		
+		EVENT_MANAGER:RegisterForUpdate(ADDON_NAME, 5*1000, DisbandIfEmpty)
 	end
 end
 
