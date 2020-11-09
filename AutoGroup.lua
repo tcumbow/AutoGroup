@@ -24,7 +24,7 @@ local function OnAddonLoaded(event, name)
 	if name == ADDON_NAME then
 		EVENT_MANAGER:UnregisterForEvent(ADDON_NAME, event)
 		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_LOGOUT_DEFERRED, LeaveGroup)
-		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_FRIEND_PLAYER_STATUS_CHANGED, OnEventFriendPlayerStatusChanged)(string PlayerName,luaindex prevStatus,luaindex curStatus
+		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_FRIEND_PLAYER_STATUS_CHANGED, OnEventFriendPlayerStatusChanged)
 		
 	end
 end
