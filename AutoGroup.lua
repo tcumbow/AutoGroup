@@ -9,19 +9,6 @@ local function LeaveGroup()
 	end
 end
 
-local function OnEventFriendPlayerStatusChanged(PlayerName,prevStatus,curStatus)
-	if PlayerName == "@Samantha.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
-		GroupInviteByName("@Samantha.C")
-	end
-	
-	if PlayerName == "@Tommy.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
-		GroupInviteByName("@Tommy.C")
-	end
-
-	DisbandIfEmpty()
-
-end
-
 local function DisbandIfEmpty()
 	
 	if IsUnitGrouped("player") then
@@ -46,6 +33,19 @@ local function DisbandIfEmpty()
 
 end
 
+
+local function OnEventFriendPlayerStatusChanged(_,PlayerName,_,prevStatus,curStatus)
+	if PlayerName == "@Samantha.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
+		GroupInviteByName("@Samantha.C")
+	end
+	
+	if PlayerName == "@Tommy.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
+		GroupInviteByName("@Tommy.C")
+	end
+
+	DisbandIfEmpty()
+
+end
 
 local function OnAddonLoaded(event, name)
 	if name == ADDON_NAME then
