@@ -10,7 +10,6 @@ local function LeaveGroup()
 end
 
 local function DisbandIfEmpty()
-	
 	if IsUnitGrouped("player") then
 		local GroupEmpty = true
 		for i = 1, GetGroupSize() do
@@ -35,11 +34,12 @@ end
 
 
 local function OnEventFriendPlayerStatusChanged(_,PlayerName,_,prevStatus,curStatus)
-	if PlayerName == "@Samantha.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
+	
+	if PlayerName == "@Samantha.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) and GetDisplayName()=="@Tommy.C" then
 		GroupInviteByName("@Samantha.C")
 	end
 	
-	if PlayerName == "@Tommy.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) then
+	if PlayerName == "@Tommy.C" and curStatus == PLAYER_STATUS_ONLINE and (IsUnitGroupLeader("player") or not IsUnitGrouped("player")) and GetDisplayName()=="@Samantha.C" then
 		GroupInviteByName("@Tommy.C")
 	end
 
