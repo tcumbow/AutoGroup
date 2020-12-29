@@ -1,0 +1,9 @@
+{
+    "emeraldwalk.runonsave": {
+    "commands": [
+        {
+            "cmd": "robocopy .\\AutoGroup A:\\AutoGroup /mir"
+        }
+    ]
+    }
+}
